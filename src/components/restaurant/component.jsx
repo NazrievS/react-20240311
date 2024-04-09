@@ -23,4 +23,3 @@ export const Restaurant = ({restaurant}) => {
             </div>
         </div>
     )
-}
