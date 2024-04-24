@@ -1,8 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCurrrentTheme } from "../contexts/theme";
+import { useCurrentUser } from "../contexts/user";
 import { Menu } from "../menu/component";
 import { Reviews } from "../reviews/component";
 
-export const Restaurant = ({restaurant}) => {
+export const Restaurant = ({restaurant, className}) => {
     
     if (!restaurant) {
         return null;
@@ -10,9 +11,12 @@ export const Restaurant = ({restaurant}) => {
 
     const { name, menu, reviews } = restaurant;
 
+    const {user} = useCurrentUser();
+
     return (
         <div>
-            <h1>{name}</h1>
+            {user}
+            <h1 className={className}>{name}</h1>
             <div>
                 <h3>Menu:</h3>
                 <Menu menu={menu} />
@@ -23,3 +27,4 @@ export const Restaurant = ({restaurant}) => {
             </div>
         </div>
     )
+}
