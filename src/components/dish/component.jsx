@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react"
+import { useCurrentUser } from "../contexts/user";
+import { Counter } from "../counter/component";
 
 const useCount = ({defaultValue = 0, step = 1} = {}) => {
 
@@ -20,15 +22,16 @@ const useCount = ({defaultValue = 0, step = 1} = {}) => {
 
 export const Dish = ( {dish}) => {
     
-    const {amount, increment, decrement} = useCount();
-    const [value, setValue] = useState(0);
+    const {amount, setAmount} = useCount();
+
+    const {currentUser} = useCurrentUser();
 
     return (
     <div> 
-    {dish.name} 
-    <button onClick={decrement} disabled={amount===0}>-</button>
-    <span>{amount}</span>
-    <button onClick={increment} disabled={amount===5}>+</button>
+        {dish.name} 
+            <div>
+                {!!currentUser && <Counter value={amount} onChange={setAmount} />}
+            </div>
     </div>
     )
 }

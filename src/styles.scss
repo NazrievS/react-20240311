@@ -1,0 +1,20 @@
+body, #root {
+    height: 100vh;
+    margin: 0;
+}
+
+.wrapper {
+    width: 60%;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabsPadding {
+    padding: 20px 0;
+}
+
+.restaurantsNameCentering{
+    text-align: center;
+}
