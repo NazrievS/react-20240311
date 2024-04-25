@@ -1,17 +1,19 @@
 import classNames from "classnames"
-import { Tab } from "../tab/component"
+import { RestaurantTab } from "../restaurant-tab/component"
 import styles from './styles.module.scss'
+import { useSelector } from "react-redux"
 
 
-export const RestaurantTabs = ( {restaurants, onTabClick, activeTabIndex, className}) => {
+export const RestaurantTabs = ( {onTabClick, activeRestaurantId, className}) => {
+    const restaurantIds = useSelector((state) => state.restaurant.ids);
 
     return (
         <div className={classNames(styles.root, className)}>
-        {restaurants?.map((restaurant, index) => (
-          <Tab
-            title = {restaurant.name}
-            onClick = {() => onTabClick(index)}
-            isActive = {index === activeTabIndex}
+        {restaurantIds.map((restaurantId) => (
+          <RestaurantTab
+            restaurantId = {restaurantId}
+            onClick = {() => onTabClick(restaurantId)}
+            isActive = {restaurantId === activeRestaurantId}
           />
           ))}
       </div>
