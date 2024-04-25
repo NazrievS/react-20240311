@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react"
 import { useCurrentUser } from "../contexts/user";
 import { Counter } from "../counter/component";
+import { useSelector } from "react-redux";
 
 const useCount = ({defaultValue = 0, step = 1} = {}) => {
 
@@ -20,11 +21,13 @@ const useCount = ({defaultValue = 0, step = 1} = {}) => {
 };
 
 
-export const Dish = ( {dish}) => {
+export const Dish = ( {dishId}) => {
     
     const {amount, setAmount} = useCount();
 
     const {currentUser} = useCurrentUser();
+
+    const dish = useSelector((state) => state.dish.entities[dishId]);
 
     return (
     <div> 

@@ -13,13 +13,12 @@ import { UserContext, useUser } from './components/contexts/user';
 const ACTIVE_RESTAURANT_INDEX_STORAGE_KEY = "activeRestaurantIndex";
 
 export const App = () => {
-    const [activeRestaurantIndex, setActiveRestaurandIndex] = useState(() => 
+    const [activeRestaurantId, setActiveRestaurandId] = useState(() => 
     Number(localStorage.getItem(ACTIVE_RESTAURANT_INDEX_STORAGE_KEY)));
 
     const {theme, toggleTheme} = useTheme();
     const {currentUser, login, logout} = useUser();
 
-    const activeRestaurant = restaurants[activeRestaurantIndex];
 
     const themeContextValue = useMemo(
       () => ({theme, toggleTheme}),
@@ -36,17 +35,13 @@ export const App = () => {
         <UserContext.Provider value = {userContextValue}>
           <Layout className={"wrapper"}>
             <RestaurantTabs 
-              restaurants={restaurants} 
-              onTabClick={(index) => {
-                setActiveRestaurandIndex(index)
-                setStorageItem(ACTIVE_RESTAURANT_INDEX_STORAGE_KEY, index)
-              }}
-              activeTabIndex={activeRestaurantIndex}
+              onTabClick={setActiveRestaurandId}
+              activeRestaurantId={setActiveRestaurandId}
               className={"tabsPadding"}
             />
             
-            {activeRestaurant ? (
-              <Restaurant restaurant={activeRestaurant} className={"restaurantsNameCentering"}/>
+            {activeRestaurantId ? (
+              <Restaurant restaurantId={activeRestaurantId} className={"restaurantsNameCentering"}/>
               ) : (
                 <span>Selected Restaurant</span>
             )}
